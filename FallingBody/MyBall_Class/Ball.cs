@@ -71,8 +71,7 @@ namespace Ball_Class
             this.referencePoint.locationX = reference.locationX;
         }
 
-        public void setLocation(Coordinate location)
-        {
+        public void setLocation(Coordinate location) {
             this.location.locationX = location.locationX;
             this.location.locationY = location.locationY;
             //物体高度只能从容器顶部定义，所以计算值为负数，为向外部暴露正数接口，将参数取相反数后计算
@@ -80,23 +79,17 @@ namespace Ball_Class
             this.startX = this.location.locationX;
         }
 
-        private void timeGoing()
-        {
+        private void timeGoing() {
             Thread.Sleep(20);       //休眠一秒
             this.movementTime++;
             this.time_Y++;
         }
 
-        private void restTime_Y()
-        {
+        private void restTime_Y() {
             this.time_Y = 0;
         }
 
-        /// <summary>
-        /// 开始运动，由对象建立者调用,在开始之前必须调用setPara对该对象进行初始化
-        /// </summary>
-        public void start()
-        {
+        public void start() {
             ThreadStart upcastThreadS = new ThreadStart(upcast);       //数学模型线程
             ThreadStart frashThreadS = new ThreadStart(changePoint);       //显示线程
             Thread upcastThread = new Thread(upcastThreadS);
@@ -106,42 +99,26 @@ namespace Ball_Class
             upcastThread.Start();
             frashThread.Start();
         }
-        /// <summary>
-        /// 以多线程的方式刷新重物位置
-        /// </summary>
-        private void changePoint()
-        {
+        private void changePoint() {
             DSetPoint dSetPoint = new DSetPoint(setBodyPoint);
-            while (startH > 0 || this.velocity.velocityY > 0)
-            {
+            while (startH > 0 || this.velocity.velocityY > 0) {
                 Thread.Sleep(10);     //刷新坐标的延迟，要求为timeGoing延迟的一半
                 this.Invoke(dSetPoint, location.locationY, location.locationX);
             }
         }
-        /// <summary>
-        /// 设置重物的显示位置
-        /// </summary>
-        /// <param name="Y">距地高度</param>
-        /// <param name="X">水平位置</param>
-        private void setBodyPoint(double Y, double X)
-        {
+        private void setBodyPoint(double Y, double X) {
             this.Left = Convert.ToInt32(X);
             this.Top = Convert.ToInt32(this.referencePoint.locationY - BALLSIZE - Y);
         }
 
-        /// <summary>
-        /// 外部调用，强行停止小球的运动
-        /// </summary>
-        public void stop()
-        {
+        public void stop() {
             this.velocity.velocityY = -1;
             this.location.locationY = -1;
         }
         /***********************************************
          * 运动模型与刷新图像
          * ********************************************/
-        private void upcast()
-        {
+        private void upcast()  {
             double Vy = this.velocity.velocityY;
             double Vx = this.velocity.velocityX;
             double aY = this.force.forceY / mass;
