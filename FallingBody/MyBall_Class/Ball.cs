@@ -9,70 +9,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
-namespace MyBall_Class
+namespace Ball_Class
 {
-    /// <summary>
-    /// 重物小球
-    /// 可以任意拖动
-    /// 使用步骤
-    /// 1、新建对象；2、设置参数，调用setPara()；3、设置重物受力,调用setForce()；4、开始抛动重物，调用start()
-    /// </summary>
-    public partial class MyBall : UserControl
+    public partial class Ball : UserControl
     {
+        private const double BALLSIZE = 64;
+
+        private double mass = 0;
+        private readonly Coordinate location = new Coordinate(0, 0);
+        private readonly Velocity velocity = new Velocity(0, 0);
+        private readonly Force force = new Force(0, 0);
+        private int movementTime = 0;
+        private int time_Y = 0;
+
         private Point mouseFirstPoint = Point.Empty;
         private delegate void DSetPoint(double H, double X);       //代理，帮助控制该对象在窗体中的位置
-        /// <summary>
-        /// 重物的质量——预留
-        /// </summary>
-        private double mass = 1;
-        /// <summary>
-        /// 水平方向上受到的力——预留
-        /// </summary>
-        private double Fx = 0;
-        /// <summary>
-        /// 竖直方向上受到的力——预留
-        /// </summary>
-        private double Fh = 0;
-        /// <summary>
-        /// 反弹率，取值在0-1之间
-        /// </summary>
-        private double rate = 6.0 / 10;
-        /// <summary>
-        /// 加速度
-        /// </summary>
-        private int G = -1;
-        /// <summary>
-        /// 水平加速度
-        /// </summary>
-        private double Ax = 0;
-        /// <summary>
-        /// 竖直方向上的加速度——合力加速度
-        /// </summary>
-        private double AH = 0;
-        /// <summary>
-        /// 运动时间
-        /// </summary>
-        private int time = 0;
-        /// <summary>
-        /// 运动时间——竖直运动，有回弹时使用
-        /// </summary>
-        private int time_H = 0;
-        /// <summary>
-        /// 水平移动速度
-        /// </summary>
-        private double Vx = 0;
+        private double rate = 0.6;
+
+        
         /// <summary>
         /// 水平初始移速，向右为正
         /// </summary>
         private double Vx0 = 0;
-        /// <summary>
-        /// 竖直移动速度
-        /// </summary>
-        private double Vh = 0;
+        
         /// <summary>
         /// 竖直方向初始移速，向上为正
         /// </summary>
-        private double Vh0 = 0;
+        private double Vy0 = 0;
         /// <summary>
         /// 物体的初始高度——对地高度
         /// </summary>
@@ -89,10 +52,7 @@ namespace MyBall_Class
         /// 参照物对窗体的高度——参照物距窗体顶端的位置......Hr-Hw-Ho=H
         /// </summary>
         private double Hr = 0;
-        /// <summary>
-        /// 物体本身的高度，即Height......Hr-Hw-Ho=H
-        /// </summary>
-        private double Ho = 0;
+        
         /// <summary>
         /// 水平方向的初始位置
         /// </summary>
@@ -101,32 +61,42 @@ namespace MyBall_Class
         /// 水平方向的距离（从左到右，距离参照物的距离）
         /// </summary>
         private double X = 0;
-        public MyBall()
-        {
+
+        public Ball(double mass) {
+            setMass(mass);
             InitializeComponent();
-            initPara();        //初始化参数
+            initPara();
         }
 
-        /*******************************************
-         * set方法
-         * *****************************************/
-        /// <summary>
-        /// 设置物体质量
-        /// </summary>
-        /// <param name="pMass">物体质量</param>
-        public void setMass(double pMass) { this.mass = pMass; }
-        /// <summary>
-        /// 设置物体受力
-        /// </summary>
-        /// <param name="pFx">水平受力</param>
-        /// <param name="pFh">竖直受力</param>
-        public void setForce(double pFx, double pFh)
-        { this.Fx = pFx; this.Fh = pFh; this.Ax = Fx / mass; this.AH = (Fh / mass) + G; }
-        /// <summary>
-        /// 设置加速度G
-        /// </summary>
-        /// <param name="pG">加速度，默认值为1</param>
-        public void setG(int pG) { this.G = -pG; }
+        private void initPara()
+        {
+            Force f = new Force(0, -10 * mass);
+            this.putForce(f);
+        }
+
+        public void setMass(double mass) { this.mass = mass; }
+
+        public void setCoordinate(Coordinate c) {
+            this.location.locationX = c.locationX;
+            this.location.locationY = c.locationY;
+        }
+
+        public void setVelocity(Velocity v) {
+            this.velocity.velocityX = v.velocityX;
+            this.velocity.velocityY = v.velocityY;
+        }
+
+        public void putForce(Force f)
+        {
+            this.force.forceX += f.forceX;
+            this.force.forceY += f.forceY;
+        }
+        //该方法不符合存在施力物体逻辑性错误，待改善
+        public void resetForce() {
+            this.force.forceX = 0;
+            this.force.forceY = 0;
+        }
+
         /// <summary>
         /// 设置水平初速度
         /// </summary>
@@ -135,14 +105,14 @@ namespace MyBall_Class
         /// <summary>
         /// 设置竖直方向的初始速度
         /// </summary>
-        /// <param name="pVh0">竖直方向初始速度</param>
-        private void setV0_H(double pVh0) { this.Vh0 = pVh0; }
+        /// <param name="pVy0">竖直方向初始速度</param>
+        private void setV0_H(double pVy0) { this.Vy0 = pVy0; }
         /// <summary>
         /// 设置初始速度——对外可用
         /// </summary>
         /// <param name="pVx0">水平初速度</param>
-        /// <param name="pVh0">竖直方向的初始速度</param>
-        public void setV0(double pVx0, double pVh0) { setV0_X(pVx0); setV0_H(pVh0); }
+        /// <param name="pVy0">竖直方向的初始速度</param>
+        public void setV0(double pVx0, double pVy0) { setV0_X(pVx0); setV0_H(pVy0); }
         /// <summary>
         /// 设置触地后反弹率
         /// </summary>
@@ -160,70 +130,37 @@ namespace MyBall_Class
         /// <param name="pHr">参照物对窗体的高度——参照物距窗体顶端的位置</param>
         /// <param name="pHw">物体在窗体中的Y方向位置——距窗体顶端位置</param>
         /// <param name="pHo">物体本身的高度，即Height</param>
-        public void setPoint_H(double pHr, double pHw, double pHo = 64)
+        public void setPoint_H(double pHr, double pHw, double pHo = BALLSIZE)
         {
-            this.Hw = pHw; this.Ho = pHo; this.Hr = pHr;
-            this.startH = Hr - Hw - Ho;         //计算初始位置高度
+            this.Hw = pHw; 
+            this.Hr = pHr;
+            this.startH = Hr - Hw - BALLSIZE;         //计算初始位置高度
         }
-        /// <summary>
-        /// 在开始落体前，设置各项参数
-        /// </summary>
-        /// <param name="pHr">参照物对窗体的高度——参照物距窗体顶端的位置</param>
-        /// <param name="pHw">物体在窗体中的Y方向位置——距窗体顶端位置</param>
-        /// <param name="pX">物体水平位置——距窗体左边框距离</param>
-        /// <param name="pVx0">重物加速度</param>
-        /// <param name="pVh0">重物加速度</param>
-        /// <param name="pG">水平初始速度</param>
-        /// <param name="pRate">触地后反弹率</param>
-        public void setPara(double pHr, double pHw, double pX, double pVx0 = 0, double pVh0 = 0, int pG = 1, double pRate = 0.6)
-        {
-            this.setG(pG);
-            this.setRate(pRate);
-            setV0(pVx0, pVh0);
-            this.setPoint_H(pHr, pHw, 0.6);
-            this.setPoint_X(pX);
-        }
-        /****************************************
-         * get方法
-         * **************************************/
-
-
+        
 
 
 
         /****************************************
          * 参数初始化方法
          * *************************************/
-        /// <summary>
-        /// 参数初始化，供内部方法使用
-        /// </summary>
-        /// <param name="pG">重物加速度</param>
-        /// <param name="pVx0">水平初始速度</param>
-        /// <param name="pRate">触地后反弹率</param>
-        private void initPara(int pG = 1, double pRate = 0.6, double pVx0 = 0, double pVh0 = 0)
-        {
-            this.setG(pG);
-            this.setRate(pRate);
-            this.setV0(pVx0, pVh0);
-            this.setForce(0, 0);
-        }
+
+        
         /// <summary>
         /// 使时间自增
         /// </summary>
         /// <returns></returns>
         private void timeGoing()
         {
-            Thread.Sleep(20); //休眠一秒
-            this.time++;
-            this.time_H++;
-            //return time;
+            Thread.Sleep(20);       //休眠一秒
+            this.movementTime++;
+            this.time_Y++;
         }
         /// <summary>
         /// 将时间归零
         /// </summary>
-        private void restTime()
+        private void restTime_Y()
         {
-            this.time_H = 0;
+            this.time_Y = 0;
         }
 
         /// <summary>
@@ -256,30 +193,34 @@ namespace MyBall_Class
         /// </summary>
         private void upcast()
         {
+            double Vy = this.velocity.velocityY;
+            double Vx = this.velocity.velocityX;
+            double aY = this.force.forceY / mass;
+            double aX = this.force.forceX / mass;
             H = startH;
             X = startX;
-            Vh = Vh0;
+            Vy = Vy0;
             Vx = Vx0;
-            double derVh0 = 0;         //检测相邻两次回弹速度是否符合要求
-            while (Vh0 > 0 || startH > 0)
+            double derVy0 = 0;         //检测相邻两次回弹速度是否符合要求
+            while (Vy0 > 0 || startH > 0)
             {
-                while ((H + Vh) >= 0)
+                while ((H + Vy) >= 0)
                 {
-                    H += Vh;
-                    Vh += AH;
+                    H += Vy;
+                    Vy += aY;
                     X += Vx;
-                    Vx += Ax;
+                    Vx += aX;
                     timeGoing();
                 }
                 H = 0;
                 startH = 0;
-                restTime();
-                derVh0 = Vh0 + (Vh - AH) * rate;
-                if (derVh0 > -AH || derVh0 < AH) { Vh0 = -Vh * rate; }
+                restTime_Y();
+                derVy0 = Vy0 + (Vy - aY) * rate;
+                if (derVy0 > -aY || derVy0 < aY) { Vy0 = -Vy * rate; }
                 else if (rate == 1.0) { }
-                else if (Vh0 > 1) { Vh0--; }
-                else { Vh0 = -1; break; }
-                Vh = Vh0;
+                else if (Vy0 > 1) { Vy0--; }
+                else { Vy0 = -1; break; }
+                Vy = Vy0;
             }
         }
         /// <summary>
@@ -290,7 +231,7 @@ namespace MyBall_Class
         private void setBodyPoint(double H, double X)
         {
             this.Left = Convert.ToInt32(X);
-            this.Top = Convert.ToInt32(Hr - Ho - H);
+            this.Top = Convert.ToInt32(Hr - BALLSIZE - H);
         }
         /// <summary>
         /// 以多线程的方式刷新重物位置
@@ -298,7 +239,7 @@ namespace MyBall_Class
         private void changePoint()
         {
             DSetPoint dSetPoint = new DSetPoint(setBodyPoint);
-            while (startH > 0 || Vh0 > 0)
+            while (startH > 0 || Vy0 > 0)
             {
                 Thread.Sleep(10);     //刷新坐标的延迟，要求为timeGoing延迟的一半
                 this.Invoke(dSetPoint, H, X);
@@ -338,14 +279,6 @@ namespace MyBall_Class
         {
             return this.Parent.PointToClient(this.PointToScreen(p));
         }
-        /*******************************************************
-         * 
-         * *****************************************************/
-
-
-
-
-
 
 
     }

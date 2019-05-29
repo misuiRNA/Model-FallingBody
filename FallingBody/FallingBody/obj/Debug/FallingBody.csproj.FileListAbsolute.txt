@@ -31,3 +31,14 @@ F:\server\git\FallingBody\FallingBody\obj\Debug\FallingBody.csprojResolveAssembl
 F:\server\git\FallingBody\FallingBody\obj\Debug\FallingBody.Form1.resources
 F:\server\git\FallingBody\FallingBody\obj\Debug\FallingBody.Properties.Resources.resources
 F:\server\git\FallingBody\FallingBody\obj\Debug\FallingBody.csproj.GenerateResource.Cache
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\bin\Debug\FallingBody.exe.config
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\obj\Debug\FallingBody.exe
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\obj\Debug\FallingBody.pdb
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\bin\Debug\FallingBody.exe
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\bin\Debug\FallingBody.pdb
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\obj\Debug\FallingBody.csprojResolveAssemblyReference.cache
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\obj\Debug\FallingBody.Form1.resources
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\obj\Debug\FallingBody.Properties.Resources.resources
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\obj\Debug\FallingBody.csproj.GenerateResource.Cache
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\bin\Debug\Ball_Class.dll
+F:\server\git\repository\Model-FallingBody\FallingBody\FallingBody\bin\Debug\Ball_Class.pdb

@@ -1,6 +1,6 @@
-﻿namespace MyBall_Class
+﻿namespace Ball_Class
 {
-    partial class MyBall
+    partial class Ball
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.BackgroundImage = global::MyBall_Class.Properties.Resources.ball;
+            this.BackgroundImage = global::Ball_Class.Properties.Resources.ball;
             this.MaximumSize = new System.Drawing.Size(64, 64);
             this.MinimumSize = new System.Drawing.Size(64, 64);
             this.Name = "MyBall";

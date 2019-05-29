@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FallingBody", "FallingBody\FallingBody.csproj", "{54EA61A0-F83C-4274-AA45-CA64D7B47F5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBall_Class", "MyBall_Class\MyBall_Class.csproj", "{242DB30D-C487-4CFB-82B4-0069C149FED6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ball_Class", "MyBall_Class\Ball_Class.csproj", "{242DB30D-C487-4CFB-82B4-0069C149FED6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

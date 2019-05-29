@@ -1,0 +1,8 @@
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\Ball_Class.Ball.resources
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\Ball_Class.csproj.GenerateResource.Cache
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\bin\Debug\Ball_Class.dll
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\bin\Debug\Ball_Class.pdb
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\Ball_Class.Properties.Resources.resources
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\Ball_Class.dll
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\Ball_Class.pdb
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\Ball_Class.csprojResolveAssemblyReference.cache

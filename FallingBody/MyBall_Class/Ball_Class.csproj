@@ -7,8 +7,8 @@
     <ProjectGuid>{242DB30D-C487-4CFB-82B4-0069C149FED6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyBall_Class</RootNamespace>
-    <AssemblyName>MyBall_Class</AssemblyName>
+    <RootNamespace>Ball_Class</RootNamespace>
+    <AssemblyName>Ball_Class</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,23 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewMyBall.cs" />
-    <Compile Include="MyBall.cs">
+    <Compile Include="Coordinate.cs" />
+    <Compile Include="Ball.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MyBall.Designer.cs">
-      <DependentUpon>MyBall.cs</DependentUpon>
+    <Compile Include="Ball.Designer.cs">
+      <DependentUpon>Ball.cs</DependentUpon>
     </Compile>
+    <Compile Include="Force.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Velocity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MyBall.resx">
-      <DependentUpon>MyBall.cs</DependentUpon>
+    <EmbeddedResource Include="Ball.resx">
+      <DependentUpon>Ball.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

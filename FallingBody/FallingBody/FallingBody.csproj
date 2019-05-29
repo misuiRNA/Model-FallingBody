@@ -78,9 +78,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyBall_Class\MyBall_Class.csproj">
+    <ProjectReference Include="..\MyBall_Class\Ball_Class.csproj">
       <Project>{242DB30D-C487-4CFB-82B4-0069C149FED6}</Project>
-      <Name>MyBall_Class</Name>
+      <Name>Ball_Class</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

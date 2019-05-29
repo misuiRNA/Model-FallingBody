@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.myBall1 = new MyBall_Class.MyBall();
+            this.myBall1 = new Ball_Class.Ball(1);
             this.SuspendLayout();
             // 
             // myBall1
@@ -48,7 +48,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 330);
+            this.ClientSize = new System.Drawing.Size(669, 479);
             this.Controls.Add(this.myBall1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -58,7 +58,7 @@
 
         #endregion
 
-        private MyBall_Class.MyBall myBall1;
+        private Ball_Class.Ball myBall1;
     }
 }
 

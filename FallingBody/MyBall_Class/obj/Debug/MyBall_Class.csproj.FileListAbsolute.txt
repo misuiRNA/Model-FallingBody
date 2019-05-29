@@ -28,3 +28,11 @@ F:\server\git\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.Properties.Resourc
 F:\server\git\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.csproj.GenerateResource.Cache
 F:\server\git\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.dll
 F:\server\git\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.pdb
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\bin\Debug\MyBall_Class.dll
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\bin\Debug\MyBall_Class.pdb
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.csprojResolveAssemblyReference.cache
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.Ball.resources
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.Properties.Resources.resources
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.csproj.GenerateResource.Cache
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.dll
+F:\server\git\repository\Model-FallingBody\FallingBody\MyBall_Class\obj\Debug\MyBall_Class.pdb
