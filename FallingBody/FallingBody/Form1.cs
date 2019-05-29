@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ball_Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +20,15 @@ namespace FallingBody
 
         private void myBall1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            myBall1.setRate(0.8);
+            Coordinate referencePoint = new Coordinate(0, this.Height);
+            myBall1.setReferencePoint(referencePoint);
+            myBall1.setReboundRate(0.8);
             myBall1.setMass(2);
-            myBall1.setPoint_H(480, myBall1.Top);
-            myBall1.setPoint_X(myBall1.Left);
+            Coordinate location = new Coordinate(myBall1.Left - referencePoint.locationX,  myBall1.Top - referencePoint.locationY);
+            myBall1.setLocation(location);
+            myBall1.setVelocity(new Velocity( 0, 0));
+            //myBall1.putForce(new Force(0, 8));
+
             myBall1.start();
         }
     }

@@ -1,4 +1,5 @@
-﻿namespace FallingBody
+﻿using Ball_Class;
+namespace FallingBody
 {
     partial class Form1
     {
@@ -29,7 +30,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.myBall1 = new Ball_Class.Ball(1);
+            Coordinate referencePoint = new Coordinate(0, this.Height);
+            this.myBall1 = new Ball_Class.Ball(1, referencePoint);
             this.SuspendLayout();
             // 
             // myBall1
